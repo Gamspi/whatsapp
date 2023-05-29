@@ -8,6 +8,8 @@ export const useController = () => {
     const submitLoginFormHandler = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         fetchLogin({idInstance, apiTokenInstance})
+        setIdInstance('' )
+        setApiTokenInstance('' )
     }
     const setApiTokenInstanceHandler = (e: FormEvent<HTMLInputElement>) => {
         setApiTokenInstance(e.currentTarget.value)

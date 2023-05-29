@@ -4,6 +4,7 @@ import {fetchLogin} from "./actions";
 
 const initialState: GeneralState = {
     apiTokenInstance: '',
+    isGeneralLoading: false,
     idInstance: '',
     isLogin: false
 };
@@ -17,6 +18,13 @@ export const generalSlice = createSlice({
             state.idInstance = arg.idInstance
             state.apiTokenInstance = arg.apiTokenInstance
             state.isLogin = true
+            state.isGeneralLoading = false
+        })
+        addCase(fetchLogin.pending, (state) => {
+            state.isGeneralLoading = true
+        })
+        addCase(fetchLogin.rejected, (state) => {
+            state.isGeneralLoading = false
         })
     },
 });

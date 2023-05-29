@@ -26,7 +26,6 @@ const LoginForm = () => {
                     Login
                 </StyledLoginForm.Button>
             </StyledLoginForm.Footer>
-
         </StyledLoginForm.Form>
     );
 };
