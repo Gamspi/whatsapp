@@ -2,11 +2,12 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import {GreenService} from "../../core/api/greenService";
 import {useTypeSelector} from "../../core/hooks/useTypeSelector";
 
-const fetchContacts = createAsyncThunk('chat/fetchContacts', async (args, {rejectWithValue}) =>{
+const fetchContacts = createAsyncThunk('chat/fetchContacts', async (args, {rejectWithValue, getState}) =>{
 
     try {
-        const {idInstance, apiTokenInstance} = useTypeSelector(state => state.general)
-       return GreenService.GET(`waInstance${idInstance}/getContacts/${apiTokenInstance}`)
+        const {general} = getState()
+
+       return await GreenService.GET(`waInstance${general.idInstance}/getContacts/${general.apiTokenInstance}`)
     }catch (e) {
         rejectWithValue('error')
     }
