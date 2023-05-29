@@ -1,6 +1,6 @@
 import slices from './redusers';
 // import reducers from 'reducers';
-import {configureStore, combineReducers} from '@reduxjs/toolkit';
+import {configureStore, combineReducers, getDefaultMiddleware} from '@reduxjs/toolkit';
 
 /**
  * Создание хранилища Redux
@@ -11,6 +11,9 @@ const rootReducer = combineReducers({
 
 const store = configureStore({
   reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: false
+    }),
 });
 export default store;
 

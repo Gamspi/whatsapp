@@ -13,8 +13,7 @@ export const chatSlice = createSlice({
     reducers,
     extraReducers: ({addCase}) => {
         addCase(fetchContacts.fulfilled, (state, action) => {
-            alert('success this is ')
-            console.log(action)
+            console.log('fetchContacts',action)
         })
         addCase(fetchContacts.rejected, () => {
             alert('error')

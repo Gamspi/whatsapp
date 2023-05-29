@@ -6,7 +6,7 @@ const fetchContacts = createAsyncThunk('chat/fetchContacts', async (args, {rejec
 
     try {
         const {idInstance, apiTokenInstance} = useTypeSelector(state => state.general)
-        GreenService.GET(`waInstance${idInstance}/getContacts/${apiTokenInstance}`)
+       return GreenService.GET(`waInstance${idInstance}/getContacts/${apiTokenInstance}`)
     }catch (e) {
         rejectWithValue('error')
     }
