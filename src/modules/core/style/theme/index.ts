@@ -11,5 +11,9 @@ export const theme = {
     messages: {
         default: Colors.DARK_BLUE,
         main: Colors.DARK_GREEN,
+    },
+    button: {
+        primary: Colors.GREEN,
+        primaryHover: Colors.DARK_GREEN
     }
 }

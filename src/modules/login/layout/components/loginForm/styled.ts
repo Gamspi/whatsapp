@@ -5,11 +5,14 @@ const Form = styled.form`
   gap: 1rem
 `
 const Button = styled.button`
-  background: green;
+  background: ${props => props.theme.button.primary};
   color: ${props => props.theme.colors.primary};
   padding: .9rem 1.2rem;
   border-radius: .8rem;
-
+  transition: background-color .15s ease-in;
+  &:hover {
+    background: ${props => props.theme.button.primaryHover};
+  }
 `
 const Body = styled.div`
   display: grid;

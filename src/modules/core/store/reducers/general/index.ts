@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {GeneralState} from './types';
+import {fetchLogin} from "./actions";
 
 const initialState: GeneralState = {
     apiTokenInstance: '',
@@ -12,6 +13,9 @@ export const generalSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: ({addCase}) => {
+        addCase(fetchLogin.fulfilled, (state) => {
+            state.isLogin = true
+        })
     },
 });
 

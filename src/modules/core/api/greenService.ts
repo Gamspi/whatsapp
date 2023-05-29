@@ -1,13 +1,13 @@
 import axios, {AxiosRequestConfig} from "axios";
 
 export class GreenService {
-    apiClient = axios.create({
-        baseURL: ''
+    static readonly apiClient = axios.create({
+        baseURL: 'https://api.green-api.com/'
     })
-    GET = async (url: string, config: AxiosRequestConfig) => {
+    static GET = async (url: string, config?: AxiosRequestConfig) => {
         return await this.apiClient.get(url, config)
     }
-    POST = async (url: string, config: AxiosRequestConfig) => {
+    static POST = async (url: string, config: AxiosRequestConfig) => {
         return await this.apiClient.post(url, config)
     }
 }
