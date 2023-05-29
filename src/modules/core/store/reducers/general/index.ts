@@ -3,7 +3,8 @@ import {GeneralState} from './types';
 
 const initialState: GeneralState = {
     apiTokenInstance: '',
-    idInstance: ''
+    idInstance: '',
+    isLogin: false
 };
 
 export const generalSlice = createSlice({
@@ -14,4 +15,4 @@ export const generalSlice = createSlice({
     },
 });
 
-export const generalReducer =  generalSlice.reducer;
+export const generalReducer = generalSlice.reducer;

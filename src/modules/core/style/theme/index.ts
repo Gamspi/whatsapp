@@ -2,7 +2,7 @@ import {Colors} from "../variables/colors";
 
 export const theme = {
     colors: {
-        primary: '',
+        primary: Colors.WHITE,
         secondary: ''
     },
     background: {
