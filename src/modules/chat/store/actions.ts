@@ -1,10 +1,14 @@
-import {Draft, PayloadAction} from "@reduxjs/toolkit";
-import {ChatState} from "./type";
-import {Message} from "../models/chat";
+import {createAsyncThunk} from "@reduxjs/toolkit";
+import {GreenService} from "../../core/api/greenService";
+import {useTypeSelector} from "../../core/hooks/useTypeSelector";
 
-const addMessage = (state: Draft<ChatState>, {payload}: PayloadAction<Message>) => {
-    state.messages = [...state.messages, payload]
-}
-export {
-    addMessage
-}
+const fetchContacts = createAsyncThunk('chat/fetchContacts', async (args, {rejectWithValue}) =>{
+
+    try {
+        const {idInstance, apiTokenInstance} = useTypeSelector(state => state.general)
+        GreenService.GET(`waInstance${idInstance}/getContacts/${apiTokenInstance}`)
+    }catch (e) {
+        rejectWithValue('error')
+    }
+})
+export {fetchContacts}

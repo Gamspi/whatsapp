@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Form = styled.form`
-    display: grid;
+  display: grid;
   gap: 1rem
 `
 const Button = styled.button`
@@ -23,7 +23,7 @@ const Title = styled.h1`
 
 `
 const Footer = styled.div`
-    display: flex;
+  display: flex;
   flex-direction: column;
 `
 export const StyledLoginForm = {

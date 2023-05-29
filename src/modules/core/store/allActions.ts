@@ -1,9 +1,9 @@
 import {chatActions} from "../../chat/store";
-import {fetchLogin} from "./reducers/general/actions";
+import * as generalActions from "./reducers/general/actions";
 
 const allActions = {
     ...chatActions,
-    fetchLogin
+    ...generalActions
 };
 export default allActions;
 

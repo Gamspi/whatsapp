@@ -13,7 +13,9 @@ export const generalSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: ({addCase}) => {
-        addCase(fetchLogin.fulfilled, (state) => {
+        addCase(fetchLogin.fulfilled, (state, {meta: {arg}}) => {
+            state.idInstance = arg.idInstance
+            state.apiTokenInstance = arg.apiTokenInstance
             state.isLogin = true
         })
     },

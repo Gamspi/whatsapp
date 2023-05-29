@@ -1,4 +1,4 @@
-import {useTypeSelector} from "../../hooks/useTypeSelector";
+import {useTypeSelector} from "../hooks/useTypeSelector";
 import {useMemo} from "react";
 import {privateRoutes, publicRoutes} from "./routes";
 
