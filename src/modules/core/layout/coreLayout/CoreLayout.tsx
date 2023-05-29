@@ -1,6 +1,8 @@
-import React, {Suspense} from 'react';
+import React, {Suspense, lazy} from 'react';
 import {Route, Routes} from 'react-router-dom';
 import NotFoundPage from "../../components/notFoundPage/NotFoundPage";
+
+const ChatComponent = lazy(() => import('../../../chat/Chat'))
 const CoreLayout = () => {
     return (
         <Routes>
@@ -8,11 +10,11 @@ const CoreLayout = () => {
                 path="/*"
                 element={
                     <Suspense fallback="">
-                       <>test</>
+                        <ChatComponent/>
                     </Suspense>
                 }
             />
-            <Route path="*" element={<NotFoundPage />} />
+            <Route path="*" element={<NotFoundPage/>}/>
         </Routes>
     );
 };

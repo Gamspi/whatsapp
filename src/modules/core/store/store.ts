@@ -1,4 +1,4 @@
-import slices from './slices';
+import slices from './redusers';
 // import reducers from 'reducers';
 import {configureStore, combineReducers} from '@reduxjs/toolkit';
 
@@ -6,7 +6,7 @@ import {configureStore, combineReducers} from '@reduxjs/toolkit';
  * Создание хранилища Redux
  */
 const rootReducer = combineReducers({
-  ...slices,
+  ...slices
 });
 
 const store = configureStore({
