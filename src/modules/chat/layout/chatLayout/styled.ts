@@ -4,17 +4,21 @@ const Container = styled.div`
   padding: 1.5rem;
   width: 100vw;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr auto;
 `
 const Messages = styled.div`
   flex-grow: 1;
 `
 const ControlPanel = styled.div`
-
+    grid-column: 1/3;
+`
+const Contacts = styled.div`
 `
 export const StyledChatLayout = {
-    Container,
     Messages,
+    Contacts,
+    Container,
     ControlPanel
 }

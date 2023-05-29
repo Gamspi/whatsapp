@@ -6,4 +6,4 @@ export type StyledProps = {
 
 export type Props = {
     item: Message,
-} & StyledProps
+}

@@ -1,16 +1,10 @@
 import React from 'react';
-import {StyledMessages} from "./ctyled";
-import {useController} from "./controller";
-import MessagesItem from "./components/messagesItem/MessagesItem";
+import MessageLayout from "./layout/MessageLayout";
 
 const Messages = () => {
-const {messages} = useController()
-     return (
-        <StyledMessages>
-            {messages.map(item => (
-                <MessagesItem item={item} key={item.id}/>
-            ))}
-        </StyledMessages>
+
+    return (
+        <MessageLayout/>
     );
 };
 

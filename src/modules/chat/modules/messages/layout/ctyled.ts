@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import whtsappBackgrond from './assets/whtsappBackgrond.png'
+import whtsappBackgrond from '../assets/whtsappBackgrond.png'
 
 export const StyledMessages = styled.div`
   position: relative;

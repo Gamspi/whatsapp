@@ -1,8 +1,22 @@
+import {ContactTypeEnum} from "../helpers/enums/contactTypeEnum";
+import {ContentTypeMessageEnum, TypeMessageEnum} from "../helpers/enums/typeMessageEnum";
+
 export interface Message {
     id: string,
     text: string,
-    userName: string,
-    time: string
+    time: string,
+    type: TypeMessageEnum
+}
+
+export interface ResponseHistoryMessage {
+    chatId: string
+    idMessage: string
+    senderId: string
+    senderName: string
+    textMessage: string
+    timestamp: number
+    type: TypeMessageEnum
+    typeMessage: ContentTypeMessageEnum
 }
 
 export interface ResponseMessage {
@@ -28,4 +42,17 @@ export interface ResponseMessage {
             }
         }
     }
+}
+
+export interface Contact {
+    id: string,
+    name: string,
+    type: ContactTypeEnum,
+    tel: string
+}
+
+export interface ResponseContact {
+    id: string,
+    name: string,
+    type: ContactTypeEnum
 }

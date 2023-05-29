@@ -3,10 +3,10 @@ import {GeneralState} from './types';
 import {fetchLogin} from "./actions";
 
 const initialState: GeneralState = {
-    apiTokenInstance: '',
+    apiTokenInstance: '5c54e5fa61a545958d0daca70013112f82ac0bb7a16f444c8e',
     isGeneralLoading: false,
-    idInstance: '',
-    isLogin: false
+    idInstance: '1101825408',
+    isLogin: true
 };
 
 export const generalSlice = createSlice({

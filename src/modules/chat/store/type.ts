@@ -1,5 +1,7 @@
-import {Message} from "../models/chat";
+import {Contact, Message} from "../models/chat";
 
 export type ChatState = {
-    messages: Message []
+    messages: Message [],
+    contacts: Contact [],
+    chosenContact: Contact | null
 }

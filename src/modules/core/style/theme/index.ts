@@ -6,7 +6,10 @@ export const theme = {
         secondary: ''
     },
     background: {
-        black: Colors.BLACK
+        black: Colors.BLACK,
+        dark: Colors.DARK,
+        lightBlue: Colors.DARK_BLUE,
+        darkBlue: Colors.LIGHT_DARK
     },
     messages: {
         default: Colors.DARK_BLUE,
