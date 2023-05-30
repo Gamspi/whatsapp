@@ -1,17 +1,18 @@
 import React from 'react';
 import {StyledMessages} from "./ctyled";
-import MessagesItem from "../components/messagesItem/MessagesItem";
 import {useController} from "./controller";
+import MessagesList from "../components/messagesList/MessagesList";
 
 const MessageLayout = () => {
-    const {messages, chosenContact} = useController()
+    const {
+        chosenContact,
+        messages
+    } = useController()
     return (
 
         <StyledMessages>
             {chosenContact ?
-                messages.map(item => (
-                    <MessagesItem item={item} key={item.id}/>
-                ))
+                <MessagesList messages={messages}/>
                 : <>
                     выберете контакт
                 </>}
