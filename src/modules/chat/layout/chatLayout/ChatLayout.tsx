@@ -7,7 +7,10 @@ import Contacts from "../../modules/contacts/Contacts";
 const ChatLayout = () => {
     return (
         <StyledChatLayout.Container>
-            <Contacts/>
+            <StyledChatLayout.Contacts>
+                <Contacts/>
+            </StyledChatLayout.Contacts>
+
             <StyledChatLayout.Messages>
                 <Messages/>
             </StyledChatLayout.Messages>

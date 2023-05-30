@@ -27,4 +27,13 @@ export const GlobalStyle = createGlobalStyle`
       outline: none;
     }
   }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.16);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px !important;
+    height: 6px !important;
+  }
 `

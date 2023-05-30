@@ -12,9 +12,10 @@ const Messages = styled.div`
   flex-grow: 1;
 `
 const ControlPanel = styled.div`
-    grid-column: 1/3;
+    grid-column: 2/3;
 `
 const Contacts = styled.div`
+    grid-row: 1/3
 `
 export const StyledChatLayout = {
     Messages,

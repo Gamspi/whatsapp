@@ -6,7 +6,7 @@ import {ContactTypeEnum} from "../helpers/enums/contactTypeEnum";
 import {AxiosResponse} from "axios";
 import {ResponseContact, ResponseHistoryMessage} from "../models/chat";
 import {contactConverter} from "../helpers/converters/contactConverter";
-import {ContentTypeMessageEnum, TypeMessageEnum} from "../helpers/enums/typeMessageEnum";
+import {ContentTypeMessageEnum} from "../helpers/enums/typeMessageEnum";
 import {historyMessageConverter} from "../helpers/converters/historyMessageConverter";
 
 const {fetchContacts, fetchMessageHistory} = extraReducers

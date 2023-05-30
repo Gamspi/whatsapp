@@ -8,7 +8,11 @@ const addMessage = (state: Draft<ChatState>, {payload}: PayloadAction<Message>) 
 const setChosenContact = (state: Draft<ChatState>, {payload}: PayloadAction<Contact | null>) => {
     state.chosenContact = payload
 }
+const addContact = (state: Draft<ChatState>, {payload}: PayloadAction<Contact>) => {
+    state.contacts = [...state.contacts, payload]
+}
 export {
+    addContact,
     addMessage,
     setChosenContact
 }

@@ -28,7 +28,6 @@ const Content = styled.div<StyledProps>`
     content: '';
     position: absolute;
     top: 0;
-    z-index: 100;
     display: block;
 
     ${props => props.isMain ?
