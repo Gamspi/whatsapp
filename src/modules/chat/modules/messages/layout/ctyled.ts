@@ -6,8 +6,7 @@ export const StyledMessages = styled.div`
   background-color: ${props => props.theme.background.black};
   width: 100%;
   height: 100%;
-
-  &:before{
+  &:before {
     content: '';
     background-image: url(${whtsappBackgrond});
     width: 100%;

@@ -1,45 +1,50 @@
-import axios, {AxiosResponse} from "axios";
-import {FormEvent, useEffect, useState} from "react";
-import {useTypeSelector} from "../../../core/hooks/useTypeSelector";
-import {ResponseMessage} from "../../models/chat";
-import {messageConverter} from "../../helpers/converters/messageConverter";
+import {FormEvent, useEffect, useRef, useState} from "react";
 import {useAction} from "../../../core/hooks/useActions";
+import {useTypeSelector} from "../../../core/hooks/useTypeSelector";
 
 export const useController = () => {
     const [textMessage, setTextMessage] = useState('')
-    const {addMessage} = useAction()
-    const {apiTokenInstance, idInstance} = useTypeSelector(state => state.general)
-    const setTextMessageHandler = (e: FormEvent<HTMLTextAreaElement>) => {
-        const target = e.target as HTMLTextAreaElement
-        setTextMessage(target.value)
+    const inputRef = useRef<HTMLDivElement>(null)
+    const {isSendLoading, chosenContact} = useTypeSelector(state => state.chat)
+    const {sendMessage} = useAction()
+    const setTextMessageHandler = (e: FormEvent<HTMLDivElement>) => {
+        const target = e.target as HTMLDivElement
+        setTextMessage(target.innerText)
+    }
+    const clearForm = () => {
+        if (inputRef.current) inputRef.current.innerHTML = ''
+        setTextMessage('')
     }
     const sendMessageHandler = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (textMessage.trim()) {
-            axios.post(`https://api.green-api.com/waInstance${idInstance}/sendMessage/${apiTokenInstance}`, {
-                chatId: '79131077475@c.us',
-                message: textMessage
-            })
+        console.log('test')
+        if (textMessage.trim() && chosenContact) {
+            sendMessage({message: textMessage, chatId: chosenContact.id})
+            clearForm()
         }
-        setTextMessage('')
+
     }
     const getMessage = () => {
-        axios.get<ResponseMessage>(`https://api.green-api.com/waInstance${idInstance}/receiveNotification/${apiTokenInstance}`).then(({data}) => {
-            // console.log(data)
-            if (data) {
-                console.log(messageConverter(data))
-                addMessage(messageConverter(data))
-            }
-
-        }).finally(() => {
-            // getMessage()
-        })
+        // axios.get<ResponseMessage>(`https://api.green-api.com/waInstance${idInstance}/receiveNotification/${apiTokenInstance}`).then(({data}) => {
+        //     // console.log(data)
+        //     if (data) {
+        //         addMessage(messageConverter(data))
+        //     }
+        //
+        // }).finally(() => {
+        //     // getMessage()
+        // })
     }
     useEffect(() => {
         getMessage()
     }, [])
+    useEffect(() => {
+        clearForm()
+    }, [chosenContact])
     return {
+        inputRef,
         textMessage,
+        isSendLoading,
         sendMessageHandler,
         setTextMessageHandler
     }

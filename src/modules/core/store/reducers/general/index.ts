@@ -3,9 +3,9 @@ import {GeneralState} from './types';
 import {fetchLogin} from "./actions";
 
 const initialState: GeneralState = {
-    apiTokenInstance: '5c54e5fa61a545958d0daca70013112f82ac0bb7a16f444c8e',
+    apiTokenInstance: '672fe0e4805c4d4d911ab9fc31bfb2f0e8f580f6399d4573ae',
     isGeneralLoading: false,
-    idInstance: '1101825408',
+    idInstance: '1101825409',
     isLogin: true
 };
 

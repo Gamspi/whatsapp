@@ -4,5 +4,6 @@ export enum TypeMessageEnum {
 }
 export enum ContentTypeMessageEnum {
     AUDIO = 'audioMessage',
-    TEXT = 'textMessage'
+    TEXT = 'textMessage',
+    EXTENDED_TEST = 'extendedTextMessage'
 }

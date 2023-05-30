@@ -32,4 +32,18 @@ const fetchMessageHistory = createAsyncThunk<any, { contact: Contact, count?: nu
             rejectWithValue('error')
         }
     })
-export {fetchContacts, fetchMessageHistory}
+const sendMessage = createAsyncThunk<any, {chatId:string, message: string}, { state: RootState }>('chat/sendMessage', async ({chatId,message}, {
+    rejectWithValue,
+    getState
+}) => {
+    try {
+        const { general} = getState()
+        return await GreenService.POST<{idMessage: string}>(`waInstance${general.idInstance}/sendMessage/${general.apiTokenInstance}`, {
+            chatId,
+            message
+        })
+    } catch (e) {
+        rejectWithValue('error')
+    }
+})
+export {fetchContacts, fetchMessageHistory, sendMessage}

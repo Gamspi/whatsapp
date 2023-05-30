@@ -1,28 +1,16 @@
 import React from 'react';
 import MessagesItem from "../messagesItem/MessagesItem";
-import {useController} from "./conteroller";
+
 import {StyledMessageList} from "./styled";
-import CustomScrollBar from "../../../../../core/components/customScrollBar/customScrollBar";
 import {Props} from "./type";
+import {useController} from "./controller";
 
 
 const MessagesList = ({messages}: Props) => {
-    const {
-        contentRef,
-        scrollBottom,
-        containerRef,
-        contentHeight,
-        containerHeight,
-        setScrollBottom,
-    } = useController({messages})
+    const {listRef} = useController({messages})
     return (
-        <StyledMessageList.Container ref={containerRef}>
-            <CustomScrollBar
-                containerHeight={containerHeight}
-                contentHeight={contentHeight}
-                value={scrollBottom}
-                setValue={setScrollBottom}/>
-            <StyledMessageList.Content ref={contentRef}>
+        <StyledMessageList.Container ref={listRef}>
+            <StyledMessageList.Content >
                 {messages.map(item => (
                     <MessagesItem item={item} key={item.id}/>
                 ))}

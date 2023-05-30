@@ -6,14 +6,18 @@ import {ContactTypeEnum} from "../helpers/enums/contactTypeEnum";
 import {AxiosResponse} from "axios";
 import {ResponseContact, ResponseHistoryMessage} from "../models/chat";
 import {contactConverter} from "../helpers/converters/contactConverter";
-import {ContentTypeMessageEnum} from "../helpers/enums/typeMessageEnum";
+import {ContentTypeMessageEnum, TypeMessageEnum} from "../helpers/enums/typeMessageEnum";
 import {historyMessageConverter} from "../helpers/converters/historyMessageConverter";
+import {timeFormater} from "../helpers/formaters/timeFormater";
+import login from "../../login/Login";
 
-const {fetchContacts, fetchMessageHistory} = extraReducers
+const {fetchContacts, fetchMessageHistory, sendMessage} = extraReducers
 const initialState: ChatState = {
     messages: [],
     contacts: [],
-    chosenContact: null
+    chosenContact: null,
+    isLoading: false,
+    isSendLoading: false
 }
 export const chatSlice = createSlice({
     name: 'shat',
@@ -30,10 +34,38 @@ export const chatSlice = createSlice({
         addCase(fetchContacts.rejected, () => {
             alert('error')
         })
-        addCase(fetchMessageHistory.fulfilled, (state, action:PayloadAction<AxiosResponse<ResponseHistoryMessage[]>>)=> {
+        addCase(fetchMessageHistory.pending, (state) => {
+            state.isLoading = true
+        })
+        addCase(fetchMessageHistory.rejected, (state) => {
+            state.isLoading = true
+        })
+        addCase(fetchMessageHistory.fulfilled, (state, action: PayloadAction<AxiosResponse<ResponseHistoryMessage[]>>) => {
+            state.isLoading = false
             const messageArray = action.payload?.data
             if (messageArray) {
-                state.messages = [...messageArray.filter(item => item.typeMessage === ContentTypeMessageEnum.TEXT).map(item => historyMessageConverter(item))]
+                state.messages = [...messageArray.filter(item => item.typeMessage === ContentTypeMessageEnum.TEXT || item.typeMessage === ContentTypeMessageEnum.EXTENDED_TEST
+                ).map(item => historyMessageConverter(item))]
+            }
+        })
+
+        addCase(sendMessage.pending, (state) => {
+            state.isSendLoading = true
+        })
+        addCase(sendMessage.rejected, (state) => {
+            state.isSendLoading = false
+        })
+        addCase(sendMessage.fulfilled, (state, action) => {
+            console.log('action', action.payload.data?.idMessage)
+            if (action.payload.data?.idMessage) {
+                const message = {
+                    id: action.payload.data.idMessage,
+                    type: TypeMessageEnum.OUTGOING,
+                    time: timeFormater(Date.now()),
+                    text: action.meta.arg.message
+                }
+                state.messages = [message,...state.messages ]
+                state.isSendLoading = false
             }
         })
     },

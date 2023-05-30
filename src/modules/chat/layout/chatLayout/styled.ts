@@ -6,18 +6,33 @@ const Container = styled.div`
   height: 100vh;
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-template-rows: 1fr auto;
+  max-height: 100vh;
+  overflow: hidden;
+`
+const Body = styled.div`
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 `
 const Messages = styled.div`
+  overflow: hidden;
   flex-grow: 1;
 `
 const ControlPanel = styled.div`
-    grid-column: 2/3;
 `
 const Contacts = styled.div`
-    grid-row: 1/3
+  height: 100%;
+  overflow: hidden;
+`
+const Empty = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 export const StyledChatLayout = {
+    Body,
+    Empty,
     Messages,
     Contacts,
     Container,

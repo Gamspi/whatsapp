@@ -8,3 +8,12 @@ export const loaderAnimation = keyframes`
     opacity: .2;
   }
 `
+
+export const sendLoaderAnimation = keyframes`
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`

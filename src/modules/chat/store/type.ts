@@ -4,4 +4,6 @@ export type ChatState = {
     messages: Message [],
     contacts: Contact [],
     chosenContact: Contact | null
+    isLoading: boolean
+    isSendLoading: boolean
 }
