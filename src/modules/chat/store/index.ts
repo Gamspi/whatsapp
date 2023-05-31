@@ -4,12 +4,13 @@ import * as reducers from "./mutatuins";
 import * as extraReducers from './actions'
 import {ContactTypeEnum} from "../helpers/enums/contactTypeEnum";
 import {AxiosResponse} from "axios";
-import {ResponseContact, ResponseHistoryMessage} from "../models/chat";
+import {ResponseContact, ResponseHistoryMessage, ResponseMessage} from "../models/chat";
 import {contactConverter} from "../helpers/converters/contactConverter";
 import {ContentTypeMessageEnum, TypeMessageEnum} from "../helpers/enums/typeMessageEnum";
 import {historyMessageConverter} from "../helpers/converters/historyMessageConverter";
 import {timeFormater} from "../helpers/formaters/timeFormater";
-import login from "../../login/Login";
+import {TypeWebhookEnum} from "../helpers/enums/typeWebhookEnum";
+import {messageConverter} from "../helpers/converters/messageConverter";
 
 const {fetchContacts, fetchMessageHistory, sendMessage, getMessage} = extraReducers
 const initialState: ChatState = {
@@ -17,7 +18,8 @@ const initialState: ChatState = {
     contacts: [],
     chosenContact: null,
     isLoading: false,
-    isSendLoading: false
+    isSendLoading: false,
+    isFetchNotification: false
 }
 export const chatSlice = createSlice({
     name: 'shat',
@@ -67,8 +69,45 @@ export const chatSlice = createSlice({
                 state.isSendLoading = false
             }
         })
-        addCase(getMessage.fulfilled, (state, action) => {
-            console.log(action)
+        addCase(getMessage.pending, (state, action) => {
+            state.isFetchNotification = true
+        })
+        addCase(getMessage.fulfilled, (state, {payload}: PayloadAction<ResponseMessage>) => {
+            state.isFetchNotification = false
+            if (payload?.body.typeWebhook === TypeWebhookEnum.IN) {
+                const chatId = payload.body.senderData.chatId
+                if (chatId === state.chosenContact?.id) {
+                    // добавляем сообщение в открытый чат
+                    state.messages = [messageConverter(payload), ...state.messages]
+                } else {
+                    const existContact = state.contacts.find(contact => contact.id === chatId)
+                    if (existContact) {
+                        //добавляем уведомление контакиту
+                        state.contacts = [...state.contacts.map(item => {
+                            if (item.id === chatId) {
+                                return {
+                                    ...item,
+                                    count: item.count + 1
+                                }
+                            }
+                            return item
+                        })]
+                    } else {
+                        // добавляем новый контакт если его нет
+                        state.contacts = [...state.contacts, {
+                            id: chatId,
+                            name: '',
+                            type: ContactTypeEnum.USER,
+                            tel: '+' + parseInt(chatId),
+                            count: 1
+                        }]
+                    }
+
+                }
+            }
+        })
+        addCase(getMessage.rejected, (state, action) => {
+            state.isFetchNotification = false
         })
     },
 });

@@ -6,4 +6,5 @@ export type ChatState = {
     chosenContact: Contact | null
     isLoading: boolean
     isSendLoading: boolean
+    isFetchNotification: boolean
 }

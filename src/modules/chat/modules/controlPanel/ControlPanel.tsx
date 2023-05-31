@@ -7,12 +7,19 @@ const ControlPanel = () => {
         inputRef,
         textMessage,
         isSendLoading,
+        isShowPlaceholder,
         sendMessageHandler,
+        keyDownInputHandler,
         setTextMessageHandler
     } = useController()
     return (
         <StyledControlPanel.Form onSubmit={sendMessageHandler}>
-            <StyledControlPanel.Input contentEditable onInput={setTextMessageHandler} ref={inputRef}/>
+            <StyledControlPanel.Input
+                contentEditable
+                onInput={setTextMessageHandler}
+                ref={inputRef}
+                onKeyDown={keyDownInputHandler}
+                placeholder={isShowPlaceholder ? 'Введите сообщение' : ''}/>
             {textMessage && <StyledControlPanel.Button>
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px">
                     <path d="M0 0h24v24H0z" fill="none"/>

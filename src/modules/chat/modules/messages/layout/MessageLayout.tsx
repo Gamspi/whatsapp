@@ -10,13 +10,16 @@ const MessageLayout = () => {
     } = useController()
     return (
 
-        <StyledMessages>
-            {chosenContact ?
+        <StyledMessages.Container>
+            <StyledMessages.Header>
+                {chosenContact?.name}
+            </StyledMessages.Header>
+            <StyledMessages.List>
                 <MessagesList messages={messages}/>
-                : <>
-                    выберете контакт
-                </>}
-        </StyledMessages>
+            </StyledMessages.List>
+
+
+        </StyledMessages.Container>
 
     );
 };

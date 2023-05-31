@@ -7,12 +7,12 @@ import {useController} from "./controller";
 
 
 const MessagesList = ({messages}: Props) => {
-    const {listRef} = useController({messages})
+    const {listRef,chosenContactId} = useController({messages})
     return (
         <StyledMessageList.Container ref={listRef}>
             <StyledMessageList.Content >
                 {messages.map(item => (
-                    <MessagesItem item={item} key={item.id}/>
+                    <MessagesItem item={item} key={item.id} isActive={chosenContactId === item.id}/>
                 ))}
             </StyledMessageList.Content>
         </StyledMessageList.Container>

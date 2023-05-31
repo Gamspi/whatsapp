@@ -14,17 +14,31 @@ const Form  = styled.form`
 const Input = styled.div`
   width: 100%;
   max-width: 95%;
+  min-height: 2.4rem;
   user-select: text;
   word-break: break-word;
   white-space: pre-wrap;
   max-height: 14.4rem;
   overflow: auto;
+  padding: .9rem 1.2rem;
+  background-color: ${props => props.theme.background.darkBlue};
+  border-radius: .8rem;
+  &:focus {
+    outline: none;
+    &:after {
+      content: '';
+    }
+  }
+  &:after {
+    content: attr(placeholder);
+  }
 `
 const  Button = styled.button`
   background: none;
   fill: white;
   cursor: pointer;
   line-height: 0;
+  padding-bottom: 0.7rem;
 `
 const Loader = styled.div`
   fill: white;

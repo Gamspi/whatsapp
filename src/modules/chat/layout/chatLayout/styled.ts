@@ -8,6 +8,8 @@ const Container = styled.div`
   grid-template-columns: auto 1fr;
   max-height: 100vh;
   overflow: hidden;
+  max-width: 1600px;
+  margin: auto;
 `
 const Body = styled.div`
   max-height: 100vh;

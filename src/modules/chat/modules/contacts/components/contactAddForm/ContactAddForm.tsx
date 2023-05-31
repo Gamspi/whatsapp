@@ -14,7 +14,7 @@ const ContactAddForm = (props: Props) => {
                     <CustomInput placeholder='Name' onChange={setNameHandler}/>
                     <CustomInput placeholder='Tel' onChange={setTelHandler}/>
                     <StyledContactAddForm.Button>
-                        Submit
+                        Добавить
                     </StyledContactAddForm.Button>
                 </StyledContactAddForm.Body>
             </StyledContactAddForm.Container> :

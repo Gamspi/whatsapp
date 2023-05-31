@@ -19,7 +19,7 @@ const AddButton = styled.button`
   background-color: ${props => props.theme.button.primary};
   transition: background-color .15s ease-in;
   padding: 1rem;
-  
+   
   &:hover {
     background-color: ${props => props.theme.button.primaryHover};
   }

@@ -19,7 +19,7 @@ const ContactsLayout = () => {
                 ))}
             </StyledContactsLayout.List>
             <StyledContactsLayout.AddButton onClick={showAddFormHandler}>
-                Add
+                Добавить контакт
             </StyledContactsLayout.AddButton>
             <ContactAddForm isShow={isShowAddForm} setIsShow={setIsShowAddForm}/>
         </StyledContactsLayout.Container>

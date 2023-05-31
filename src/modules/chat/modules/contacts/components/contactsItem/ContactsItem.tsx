@@ -14,6 +14,9 @@ const ContactsItem = ({item}: Props) => {
             <StyledContactItem.Label>
                 {item.name || item.tel}
             </StyledContactItem.Label>
+            {!!item.count && <StyledContactItem.Count>
+                {item.count}
+            </StyledContactItem.Count>}
         </StyledContactItem.Container>
     );
 };

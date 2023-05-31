@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 10px;
   }
 
-  body {
+  body, input {
     color: ${Colors.WHITE};
     background-color: ${Colors.DARK};
     font-size: 1.4rem;
@@ -25,6 +25,16 @@ export const GlobalStyle = createGlobalStyle`
     &:focus, &:hover {
       border: none;
       outline: none;
+    }
+  }
+
+  input {
+    border: none;
+    &:focus {
+      outline: none;
+    }
+    &::placeholder{
+      color: inherit;
     }
   }
 

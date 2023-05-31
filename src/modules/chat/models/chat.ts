@@ -1,5 +1,6 @@
 import {ContactTypeEnum} from "../helpers/enums/contactTypeEnum";
 import {ContentTypeMessageEnum, TypeMessageEnum} from "../helpers/enums/typeMessageEnum";
+import {TypeWebhookEnum} from "../helpers/enums/typeWebhookEnum";
 
 export interface Message {
     id: string,
@@ -22,7 +23,7 @@ export interface ResponseHistoryMessage {
 export interface ResponseMessage {
     receiptId: number,
     body: {
-        typeWebhook: string,
+        typeWebhook: TypeWebhookEnum,
         instanceData: {
             idInstance: number,
             wid: string,
@@ -48,7 +49,8 @@ export interface Contact {
     id: string,
     name: string,
     type: ContactTypeEnum,
-    tel: string
+    tel: string,
+    count: number
 }
 
 export interface ResponseContact {

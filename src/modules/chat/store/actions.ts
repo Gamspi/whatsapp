@@ -1,7 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {GreenService} from "../../core/api/greenService";
 import {RootState} from "../../core/store/store";
-import {Contact} from "../models/chat";
+import {Contact, ResponseMessage} from "../models/chat";
 
 const fetchContacts = createAsyncThunk<any, void, { state: RootState }>('chat/fetchContacts', async (args, {
     rejectWithValue,
@@ -56,7 +56,9 @@ const getMessage = createAsyncThunk<any, void, { state: RootState }>('chat/getMe
 }) => {
     try {
         const {general} = getState()
-        return await GreenService.GET<{ idMessage: string }>(`waInstance${general.idInstance}/receiveNotification/${general.apiTokenInstance}`)
+        const result = await GreenService.GET<ResponseMessage>(`waInstance${general.idInstance}/receiveNotification/${general.apiTokenInstance}`)
+        if (result.data) await GreenService.DELETE(`waInstance${general.idInstance}/deleteNotification/${general.apiTokenInstance}/${result.data.receiptId}`)
+        return result.data as ResponseMessage | null
     } catch (e) {
         rejectWithValue('error')
     }
