@@ -32,13 +32,17 @@ const fetchMessageHistory = createAsyncThunk<any, { contact: Contact, count?: nu
             rejectWithValue('error')
         }
     })
-const sendMessage = createAsyncThunk<any, {chatId:string, message: string}, { state: RootState }>('chat/sendMessage', async ({chatId,message}, {
-    rejectWithValue,
-    getState
-}) => {
+const sendMessage = createAsyncThunk<any, { chatId: string, message: string }, { state: RootState }>('chat/sendMessage', async (
+    {
+        chatId,
+        message
+    }, {
+        rejectWithValue,
+        getState
+    }) => {
     try {
-        const { general} = getState()
-        return await GreenService.POST<{idMessage: string}>(`waInstance${general.idInstance}/sendMessage/${general.apiTokenInstance}`, {
+        const {general} = getState()
+        return await GreenService.POST<{ idMessage: string }>(`waInstance${general.idInstance}/sendMessage/${general.apiTokenInstance}`, {
             chatId,
             message
         })
@@ -46,4 +50,17 @@ const sendMessage = createAsyncThunk<any, {chatId:string, message: string}, { st
         rejectWithValue('error')
     }
 })
-export {fetchContacts, fetchMessageHistory, sendMessage}
+const getMessage = createAsyncThunk<any, void, { state: RootState }>('chat/getMessage', async (_, {
+    rejectWithValue,
+    getState
+}) => {
+    try {
+        const {general} = getState()
+        return await GreenService.GET<{ idMessage: string }>(`waInstance${general.idInstance}/receiveNotification/${general.apiTokenInstance}`)
+    } catch (e) {
+        rejectWithValue('error')
+    }
+})
+
+
+export {fetchContacts, fetchMessageHistory, sendMessage, getMessage}

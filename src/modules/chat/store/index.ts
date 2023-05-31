@@ -11,7 +11,7 @@ import {historyMessageConverter} from "../helpers/converters/historyMessageConve
 import {timeFormater} from "../helpers/formaters/timeFormater";
 import login from "../../login/Login";
 
-const {fetchContacts, fetchMessageHistory, sendMessage} = extraReducers
+const {fetchContacts, fetchMessageHistory, sendMessage, getMessage} = extraReducers
 const initialState: ChatState = {
     messages: [],
     contacts: [],
@@ -56,7 +56,6 @@ export const chatSlice = createSlice({
             state.isSendLoading = false
         })
         addCase(sendMessage.fulfilled, (state, action) => {
-            console.log('action', action.payload.data?.idMessage)
             if (action.payload.data?.idMessage) {
                 const message = {
                     id: action.payload.data.idMessage,
@@ -64,9 +63,12 @@ export const chatSlice = createSlice({
                     time: timeFormater(Date.now()),
                     text: action.meta.arg.message
                 }
-                state.messages = [message,...state.messages ]
+                state.messages = [message, ...state.messages]
                 state.isSendLoading = false
             }
+        })
+        addCase(getMessage.fulfilled, (state, action) => {
+            console.log(action)
         })
     },
 });
