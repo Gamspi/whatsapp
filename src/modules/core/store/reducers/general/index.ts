@@ -1,6 +1,8 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 import {GeneralState} from './types';
 import * as actions from "./actions";
+import * as reducers from "./mutations";
+import {StatusInstanceEnum} from "../../../helpers/enums/statusInstanceEnum";
 const {fetchLogin} = actions
 const initialState: GeneralState = {
     apiTokenInstance: '',
@@ -13,16 +15,17 @@ const initialState: GeneralState = {
 export const generalSlice = createSlice({
     name: 'general',
     initialState,
-    reducers: {
-        setIsLoginError : (state, action:PayloadAction<boolean>) =>{
-            state.isLoginError = action.payload
-        }
-    },
+    reducers,
     extraReducers: ({addCase}) => {
-        addCase(fetchLogin.fulfilled, (state, {meta: {arg}}) => {
-            state.idInstance = arg.idInstance
-            state.apiTokenInstance = arg.apiTokenInstance
-            state.isLogin = true
+        addCase(fetchLogin.fulfilled, (state, {payload, meta: {arg}}) => {
+            console.log(payload)
+            if(payload?.data?.statusInstance === StatusInstanceEnum.ONLINE){
+                state.idInstance = arg.idInstance
+                state.apiTokenInstance = arg.apiTokenInstance
+                state.isLogin = true
+            }else {
+                state.isLoginError = true
+            }
             state.isGeneralLoading = false
         })
         addCase(fetchLogin.pending, (state) => {

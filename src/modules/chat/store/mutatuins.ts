@@ -18,10 +18,18 @@ const setChosenContact = (state: Draft<ChatState>, {payload}: PayloadAction<Cont
     state.chosenContact = payload
 }
 const addContact = (state: Draft<ChatState>, {payload}: PayloadAction<Omit<Contact, 'count'>>) => {
-    state.contacts = [...state.contacts, {
-        ...payload,
-        count: 0
-    }]
+    const existContact = state.contacts.find(item => item.id === payload.id)
+    if (existContact) {
+        state.chosenContact = existContact
+    } else {
+        const contact = {
+            ...payload,
+            count: 0
+        }
+        state.contacts = [...state.contacts, contact]
+        state.chosenContact = contact
+    }
+
 }
 const setIsSendMessageError = (state: Draft<ChatState>, {payload}: PayloadAction<boolean>) => {
     state.isSendMessageError = payload

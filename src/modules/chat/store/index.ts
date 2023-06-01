@@ -28,7 +28,7 @@ export const chatSlice = createSlice({
     reducers,
     extraReducers: ({addCase}) => {
         addCase(fetchContacts.fulfilled, (state, action: PayloadAction<AxiosResponse<ResponseContact[]>>) => {
-            const contactsArray = action.payload.data
+            const contactsArray = action.payload?.data
             if (contactsArray) {
                 state.contacts = [...contactsArray.filter(item => item.type === ContactTypeEnum.USER).map(item => contactConverter(item))]
             }
@@ -60,7 +60,7 @@ export const chatSlice = createSlice({
             state.isSendMessageError = true
         })
         addCase(sendMessage.fulfilled, (state, action) => {
-            if (action.payload.data?.idMessage) {
+            if (action.payload?.data?.idMessage) {
                 const message = {
                     id: action.payload.data.idMessage,
                     type: TypeMessageEnum.OUTGOING,
@@ -68,8 +68,8 @@ export const chatSlice = createSlice({
                     text: action.meta.arg.message
                 }
                 state.messages = [message, ...state.messages]
-                state.isSendLoading = false
             }
+            state.isSendLoading = false
         })
         addCase(getMessage.pending, (state) => {
             state.isFetchNotification = true

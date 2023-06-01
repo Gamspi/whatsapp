@@ -1,12 +1,12 @@
 import {GreenService} from "../../../api/greenService";
 import {createAsyncThunk} from "@reduxjs/toolkit";
 
-const fetchLogin = createAsyncThunk('' +
+const fetchLogin = createAsyncThunk<any,  { idInstance: string, apiTokenInstance: string }>(
     'general/fetchLogin',
     async ({
                idInstance,
                apiTokenInstance
-           }: { idInstance: string, apiTokenInstance: string }, {rejectWithValue}) => {
+           }, {rejectWithValue}) => {
         try {
             return GreenService.GET(`/waInstance${idInstance}/getStatusInstance/${apiTokenInstance}`)
         } catch (e) {
