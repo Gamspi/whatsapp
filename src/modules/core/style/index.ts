@@ -46,4 +46,10 @@ export const GlobalStyle = createGlobalStyle`
     width: 6px !important;
     height: 6px !important;
   }
+  #notification{
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10;
+  }
 `

@@ -17,9 +17,9 @@ const ControlPanel = () => {
     } = useController()
     return (
         <StyledControlPanel.Form onSubmit={sendMessageHandler}>
-            <Notification isShow={isSendMessageError} onClose={closeNotificationHandler}>
+            {isSendMessageError&& <Notification onClose={closeNotificationHandler}>
                 Ошибка отправки сообщения
-            </Notification>
+            </Notification>}
             <StyledControlPanel.Input
                 contentEditable
                 onInput={setTextMessageHandler}

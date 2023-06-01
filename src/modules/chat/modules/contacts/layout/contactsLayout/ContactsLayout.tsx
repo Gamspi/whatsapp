@@ -8,6 +8,7 @@ const ContactsLayout = () => {
     const{
         contacts,
         isShowAddForm,
+        chosenContact,
         setIsShowAddForm,
         showAddFormHandler
     } = useController()
@@ -15,7 +16,7 @@ const ContactsLayout = () => {
         <StyledContactsLayout.Container>
             <StyledContactsLayout.List>
                 {contacts.map(contact => (
-                    <ContactsItem item={contact} key={contact.id}/>
+                    <ContactsItem item={contact} key={contact.id} isActive={contact.id === chosenContact?.id}/>
                 ))}
             </StyledContactsLayout.List>
             <StyledContactsLayout.AddButton onClick={showAddFormHandler}>

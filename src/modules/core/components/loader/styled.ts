@@ -13,6 +13,7 @@ const Container = styled.div<StyledArgsType>`
   justify-content: center;
   background-color: ${props => props.theme.background.black};
   opacity: ${props => props.opacity || 1};
+  z-index: 20;
 `
 const Body = styled.svg`
   stroke: ${props => props.theme.colors.primary};

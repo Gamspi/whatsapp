@@ -4,17 +4,16 @@ import {useController} from "./controller";
 import {createPortal} from "react-dom";
 
 type Props = {
-    isShow: boolean,
     onClose: () => void
     children?: ReactNode,
 }
 const Notification = (props: Props) => {
     const {nodeElement} = useController(props.onClose)
-    return props.isShow ? createPortal(
+    return createPortal(
         <StyledNotification {...props}>
         </StyledNotification>,
         nodeElement
-    ) : null
+    )
 };
 
 export default Notification;

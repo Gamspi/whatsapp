@@ -34,8 +34,12 @@ const addContact = (state: Draft<ChatState>, {payload}: PayloadAction<Omit<Conta
 const setIsSendMessageError = (state: Draft<ChatState>, {payload}: PayloadAction<boolean>) => {
     state.isSendMessageError = payload
 }
+const setIsGetHistoryError = (state: Draft<ChatState>, {payload}: PayloadAction<boolean>) => {
+    state.isGetHistoryError = payload
+}
 export {
     addContact,
     setChosenContact,
+    setIsGetHistoryError,
     setIsSendMessageError
 }

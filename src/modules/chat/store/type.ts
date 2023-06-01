@@ -8,4 +8,5 @@ export type ChatState = {
     isSendLoading: boolean
     isFetchNotification: boolean
     isSendMessageError: boolean
+    isGetHistoryError : boolean
 }

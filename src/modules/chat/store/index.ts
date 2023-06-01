@@ -20,7 +20,8 @@ const initialState: ChatState = {
     isLoading: false,
     isSendLoading: false,
     isFetchNotification: false,
-    isSendMessageError: false
+    isSendMessageError: false,
+    isGetHistoryError: false
 }
 export const chatSlice = createSlice({
     name: 'shat',
@@ -34,31 +35,30 @@ export const chatSlice = createSlice({
             }
 
         })
-        addCase(fetchContacts.rejected, () => {
-            alert('error')
-        })
         addCase(fetchMessageHistory.pending, (state) => {
             state.isLoading = true
         })
-        addCase(fetchMessageHistory.rejected, (state) => {
-            state.isLoading = true
-        })
+
         addCase(fetchMessageHistory.fulfilled, (state, action: PayloadAction<AxiosResponse<ResponseHistoryMessage[]>>) => {
             state.isLoading = false
             const messageArray = action.payload?.data
             if (messageArray) {
                 state.messages = [...messageArray.filter(item => item.typeMessage === ContentTypeMessageEnum.TEXT || item.typeMessage === ContentTypeMessageEnum.EXTENDED_TEST
                 ).map(item => historyMessageConverter(item))]
+                state.isGetHistoryError = false
+            } else {
+                state.isGetHistoryError = true
             }
+        })
+        addCase(fetchMessageHistory.rejected, (state) => {
+            state.isGetHistoryError = true
+            state.isLoading = true
         })
 
         addCase(sendMessage.pending, (state) => {
             state.isSendLoading = true
         })
-        addCase(sendMessage.rejected, (state) => {
-            state.isSendLoading = false
-            state.isSendMessageError = true
-        })
+
         addCase(sendMessage.fulfilled, (state, action) => {
             if (action.payload?.data?.idMessage) {
                 const message = {
@@ -68,8 +68,14 @@ export const chatSlice = createSlice({
                     text: action.meta.arg.message
                 }
                 state.messages = [message, ...state.messages]
+            } else {
+                state.isSendMessageError = true
             }
             state.isSendLoading = false
+        })
+        addCase(sendMessage.rejected, (state) => {
+            state.isSendLoading = false
+            state.isSendMessageError = true
         })
         addCase(getMessage.pending, (state) => {
             state.isFetchNotification = true
@@ -81,7 +87,8 @@ export const chatSlice = createSlice({
                 const chatId = payload.body.senderData.chatId
                 if (chatId === state.chosenContact?.id) {
                     // добавляем сообщение в открытый чат
-                    state.messages = [messageConverter(payload), ...state.messages]
+                    const existMessage = state.messages.find(item => item.id === payload.body.idMessage)
+                    if (!existMessage) state.messages = [messageConverter(payload), ...state.messages]
                 } else {
                     const existContact = state.contacts.find(contact => contact.id === chatId)
                     if (existContact) {

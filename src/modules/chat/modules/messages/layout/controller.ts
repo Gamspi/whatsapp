@@ -4,15 +4,20 @@ import {useAction} from "../../../../core/hooks/useActions";
 
 
 export const useController = () => {
-    const {fetchMessageHistory} = useAction()
-    const {messages, chosenContact} = useTypeSelector(state => state.chat)
+    const {fetchMessageHistory, setIsGetHistoryError} = useAction()
+    const {messages, chosenContact, isGetHistoryError} = useTypeSelector(state => state.chat)
     useEffect(()=>{
         if(chosenContact) {
             fetchMessageHistory({contact:chosenContact, count: 100})
         }
     },[chosenContact])
+    const hideNotificationHandler = () => {
+        setIsGetHistoryError(false)
+    }
     return {
         messages,
         chosenContact,
+        isGetHistoryError,
+        hideNotificationHandler,
     }
 }

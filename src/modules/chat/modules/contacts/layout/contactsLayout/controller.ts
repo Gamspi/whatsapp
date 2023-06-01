@@ -5,7 +5,7 @@ import {useTypeSelector} from "../../../../../core/hooks/useTypeSelector";
 export const useController = () => {
     const {fetchContacts} = useAction()
     const [isShowAddForm, setIsShowAddForm] = useState(false)
-    const {contacts} = useTypeSelector(state => state.chat)
+    const {contacts, chosenContact} = useTypeSelector(state => state.chat)
     const showAddFormHandler = () => {
         setIsShowAddForm(true)
     }
@@ -15,6 +15,7 @@ export const useController = () => {
     return {
         contacts,
         isShowAddForm,
+        chosenContact,
         setIsShowAddForm,
         showAddFormHandler
     }

@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 
-const Container = styled.div`
+const Container = styled.div<{isActive: boolean}>`
   border-bottom: .1rem solid #202c33;
   cursor: pointer;
   transition: background-color .15s linear;
@@ -9,8 +9,12 @@ const Container = styled.div`
   overflow: hidden;
 
   &:hover {
-    background-color: ${props => props.theme.background.darkBlue};
+    background-color: ${props => props.theme.background.lightBlue};
   }
+  ${props => props.isActive && css`
+    background-color: ${props => props.theme.background.darkBlue};
+    pointer-events: none;
+  `}
 `
 const Label = styled.span`
   font-size: 1.7rem;
