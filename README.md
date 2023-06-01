@@ -7,7 +7,9 @@
 - styled-components
 
 ## Гайд по запуску
-### `npm install`
-### `npm run start`
+### Запустить скрипты:
+1. `npm install`
+2. `npm run start`
+3.  Наслаждаться
 
 [Посмотреть здесь]()
