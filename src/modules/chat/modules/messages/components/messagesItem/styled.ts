@@ -16,6 +16,8 @@ const Content = styled.div<StyledProps>`
   border-radius: .75rem;
   position: relative;
   max-width: 65%;
+  overflow: hidden;
+  word-break: break-word;
   ${props => props.isMain ?
           css`
             border-top-right-radius: 0;
