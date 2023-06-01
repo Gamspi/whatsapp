@@ -1,18 +1,23 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {GeneralState} from './types';
-import {fetchLogin} from "./actions";
-
+import * as actions from "./actions";
+const {fetchLogin} = actions
 const initialState: GeneralState = {
     apiTokenInstance: '',
     isGeneralLoading: false,
     idInstance: '',
-    isLogin: false
+    isLogin: false,
+    isLoginError: false
 };
 
 export const generalSlice = createSlice({
     name: 'general',
     initialState,
-    reducers: {},
+    reducers: {
+        setIsLoginError : (state, action:PayloadAction<boolean>) =>{
+            state.isLoginError = action.payload
+        }
+    },
     extraReducers: ({addCase}) => {
         addCase(fetchLogin.fulfilled, (state, {meta: {arg}}) => {
             state.idInstance = arg.idInstance
@@ -24,9 +29,11 @@ export const generalSlice = createSlice({
             state.isGeneralLoading = true
         })
         addCase(fetchLogin.rejected, (state) => {
+            state.isLoginError = true
             state.isGeneralLoading = false
         })
     },
 });
+export const generalActions = {...generalSlice.actions, ...actions}
 
 export const generalReducer = generalSlice.reducer;

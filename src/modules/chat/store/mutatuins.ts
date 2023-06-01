@@ -1,6 +1,6 @@
 import {Draft, PayloadAction} from "@reduxjs/toolkit";
 import {ChatState} from "./type";
-import {Contact, Message} from "../models/chat";
+import {Contact} from "../models/chat";
 
 const setChosenContact = (state: Draft<ChatState>, {payload}: PayloadAction<Contact | null>) => {
     if (payload) {
@@ -23,7 +23,11 @@ const addContact = (state: Draft<ChatState>, {payload}: PayloadAction<Omit<Conta
         count: 0
     }]
 }
+const setIsSendMessageError = (state: Draft<ChatState>, {payload}: PayloadAction<boolean>) => {
+    state.isSendMessageError = payload
+}
 export {
     addContact,
-    setChosenContact
+    setChosenContact,
+    setIsSendMessageError
 }

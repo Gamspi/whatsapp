@@ -3,4 +3,5 @@ export interface GeneralState {
     apiTokenInstance: string
     isLogin: boolean
     isGeneralLoading: boolean
+    isLoginError: boolean
 }

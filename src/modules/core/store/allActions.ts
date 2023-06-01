@@ -1,5 +1,6 @@
 import {chatActions} from "../../chat/store";
-import * as generalActions from "./reducers/general/actions";
+import {generalActions} from "./reducers/general";
+
 
 const allActions = {
     ...chatActions,

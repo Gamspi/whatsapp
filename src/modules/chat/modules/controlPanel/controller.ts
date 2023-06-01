@@ -5,9 +5,9 @@ import {useTypeSelector} from "../../../core/hooks/useTypeSelector";
 export const useController = () => {
     const [textMessage, setTextMessage] = useState('')
     const inputRef = useRef<HTMLDivElement>(null)
-    const {isSendLoading, chosenContact} = useTypeSelector(state => state.chat)
-    const {sendMessage} = useAction()
-const isShowPlaceholder = useMemo(()=> !textMessage.length,[textMessage.length])
+    const {isSendLoading, chosenContact, isSendMessageError} = useTypeSelector(state => state.chat)
+    const {sendMessage, setIsSendMessageError} = useAction()
+    const isShowPlaceholder = useMemo(() => !textMessage.length, [textMessage.length])
     const setTextMessageHandler = (e: FormEvent<HTMLDivElement>) => {
         const target = e.target as HTMLDivElement
         setTextMessage(target.innerText)
@@ -33,6 +33,9 @@ const isShowPlaceholder = useMemo(()=> !textMessage.length,[textMessage.length])
             e.preventDefault()
         }
     }
+    const closeNotificationHandler = () => {
+        setIsSendMessageError(false)
+    }
     useEffect(() => {
         clearForm()
     }, [chosenContact])
@@ -41,8 +44,10 @@ const isShowPlaceholder = useMemo(()=> !textMessage.length,[textMessage.length])
         textMessage,
         isSendLoading,
         isShowPlaceholder,
+        isSendMessageError,
         sendMessageHandler,
         keyDownInputHandler,
-        setTextMessageHandler
+        setTextMessageHandler,
+        closeNotificationHandler
     }
 }

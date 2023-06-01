@@ -1,6 +1,7 @@
 import React from 'react';
 import {useController} from "./controller";
 import {StyledControlPanel} from "./syled";
+import Notification from "../../../core/components/notification/Notification";
 
 const ControlPanel = () => {
     const {
@@ -8,12 +9,17 @@ const ControlPanel = () => {
         textMessage,
         isSendLoading,
         isShowPlaceholder,
+        isSendMessageError,
         sendMessageHandler,
         keyDownInputHandler,
-        setTextMessageHandler
+        setTextMessageHandler,
+        closeNotificationHandler
     } = useController()
     return (
         <StyledControlPanel.Form onSubmit={sendMessageHandler}>
+            <Notification isShow={isSendMessageError} onClose={closeNotificationHandler}>
+                Ошибка отправки сообщения
+            </Notification>
             <StyledControlPanel.Input
                 contentEditable
                 onInput={setTextMessageHandler}

@@ -1,8 +1,10 @@
 import {FormEvent, useState} from "react";
 import {useAction} from "../../../../core/hooks/useActions";
+import {useTypeSelector} from "../../../../core/hooks/useTypeSelector";
 
 export const useController = () => {
-    const {fetchLogin} = useAction()
+    const {fetchLogin, setIsLoginError} = useAction()
+    const {isLoginError} = useTypeSelector(state => state.general)
     const [apiTokenInstance, setApiTokenInstance] = useState('')
     const [idInstance, setIdInstance] = useState('')
     const submitLoginFormHandler = async (e: FormEvent<HTMLFormElement>) => {
@@ -18,9 +20,14 @@ export const useController = () => {
     const setIdInstanceHandler = (e: FormEvent<HTMLInputElement>) => {
         setIdInstance(e.currentTarget.value)
     }
+    const closeNotification = () => {
+        setIsLoginError(false)
+    }
     return {
         idInstance,
+        isLoginError,
         apiTokenInstance,
+        closeNotification,
         setIdInstanceHandler,
         submitLoginFormHandler,
         setApiTokenInstanceHandler,

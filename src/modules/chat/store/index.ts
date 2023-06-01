@@ -19,7 +19,8 @@ const initialState: ChatState = {
     chosenContact: null,
     isLoading: false,
     isSendLoading: false,
-    isFetchNotification: false
+    isFetchNotification: false,
+    isSendMessageError: false
 }
 export const chatSlice = createSlice({
     name: 'shat',
@@ -56,6 +57,7 @@ export const chatSlice = createSlice({
         })
         addCase(sendMessage.rejected, (state) => {
             state.isSendLoading = false
+            state.isSendMessageError = true
         })
         addCase(sendMessage.fulfilled, (state, action) => {
             if (action.payload.data?.idMessage) {
@@ -69,12 +71,13 @@ export const chatSlice = createSlice({
                 state.isSendLoading = false
             }
         })
-        addCase(getMessage.pending, (state, action) => {
+        addCase(getMessage.pending, (state) => {
             state.isFetchNotification = true
         })
         addCase(getMessage.fulfilled, (state, {payload}: PayloadAction<ResponseMessage>) => {
             state.isFetchNotification = false
-            if (payload?.body.typeWebhook === TypeWebhookEnum.IN) {
+            const validInMessage = payload?.body.typeWebhook === TypeWebhookEnum.IN && payload.body.messageData.typeMessage === ContentTypeMessageEnum.TEXT
+            if (validInMessage) {
                 const chatId = payload.body.senderData.chatId
                 if (chatId === state.chosenContact?.id) {
                     // добавляем сообщение в открытый чат
@@ -106,7 +109,7 @@ export const chatSlice = createSlice({
                 }
             }
         })
-        addCase(getMessage.rejected, (state, action) => {
+        addCase(getMessage.rejected, (state) => {
             state.isFetchNotification = false
         })
     },
