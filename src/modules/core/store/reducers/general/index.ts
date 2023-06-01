@@ -18,7 +18,6 @@ export const generalSlice = createSlice({
     reducers,
     extraReducers: ({addCase}) => {
         addCase(fetchLogin.fulfilled, (state, {payload, meta: {arg}}) => {
-            console.log(payload)
             if(payload?.data?.statusInstance === StatusInstanceEnum.ONLINE){
                 state.idInstance = arg.idInstance
                 state.apiTokenInstance = arg.apiTokenInstance
