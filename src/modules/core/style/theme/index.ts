@@ -18,6 +18,7 @@ export const theme = {
     },
     button: {
         primary: Colors.GREEN,
-        primaryHover: Colors.DARK_GREEN
+        primaryHover: Colors.DARK_GREEN,
+        disabled: Colors.LIGHT_DARK
     }
 }

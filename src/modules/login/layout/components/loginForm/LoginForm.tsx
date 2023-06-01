@@ -9,6 +9,7 @@ const LoginForm = () => {
         idInstance,
         isLoginError,
         apiTokenInstance,
+        isDisabledSubmitButton,
         closeNotification,
         setIdInstanceHandler,
         submitLoginFormHandler,
@@ -26,7 +27,7 @@ const LoginForm = () => {
                              onChange={setApiTokenInstanceHandler}/>
             </StyledLoginForm.Body>
             <StyledLoginForm.Footer>
-                <StyledLoginForm.Button>
+                <StyledLoginForm.Button type='submit' disabled={isDisabledSubmitButton}>
                     Login
                 </StyledLoginForm.Button>
             </StyledLoginForm.Footer>

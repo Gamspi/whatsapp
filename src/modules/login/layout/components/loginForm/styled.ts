@@ -13,6 +13,10 @@ const Button = styled.button`
   &:hover {
     background: ${props => props.theme.button.primaryHover};
   }
+  &:disabled{
+    background: ${props => props.theme.button.disabled};
+    cursor: not-allowed;
+  }
 `
 const Body = styled.div`
   display: grid;

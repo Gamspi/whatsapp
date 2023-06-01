@@ -1,4 +1,4 @@
-import {FormEvent, useState} from "react";
+import {FormEvent, useMemo, useState} from "react";
 import {useAction} from "../../../../core/hooks/useActions";
 import {useTypeSelector} from "../../../../core/hooks/useTypeSelector";
 
@@ -7,11 +7,14 @@ export const useController = () => {
     const {isLoginError} = useTypeSelector(state => state.general)
     const [apiTokenInstance, setApiTokenInstance] = useState('')
     const [idInstance, setIdInstance] = useState('')
+    const isDisabledSubmitButton = useMemo(() => {
+        return !(apiTokenInstance.length && idInstance.length)
+    }, [apiTokenInstance.length, idInstance.length])
     const submitLoginFormHandler = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         fetchLogin({idInstance, apiTokenInstance})
-        setIdInstance('' )
-        setApiTokenInstance('' )
+        setIdInstance('')
+        setApiTokenInstance('')
     }
     const setApiTokenInstanceHandler = (e: FormEvent<HTMLInputElement>) => {
         setApiTokenInstance(e.currentTarget.value)
@@ -27,6 +30,7 @@ export const useController = () => {
         idInstance,
         isLoginError,
         apiTokenInstance,
+        isDisabledSubmitButton,
         closeNotification,
         setIdInstanceHandler,
         submitLoginFormHandler,
