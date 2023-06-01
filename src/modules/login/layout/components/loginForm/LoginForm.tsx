@@ -19,7 +19,7 @@ const LoginForm = () => {
         <StyledLoginForm.Form onSubmit={submitLoginFormHandler}>
             <Notification isShow={isLoginError} onClose={closeNotification}>Ошибка авторизации</Notification>
             <StyledLoginForm.Title>
-                Login
+                Авторизация
             </StyledLoginForm.Title>
             <StyledLoginForm.Body>
                 <CustomInput placeholder='Id Instance' value={idInstance} onChange={setIdInstanceHandler}/>
@@ -28,7 +28,7 @@ const LoginForm = () => {
             </StyledLoginForm.Body>
             <StyledLoginForm.Footer>
                 <StyledLoginForm.Button type='submit' disabled={isDisabledSubmitButton}>
-                    Login
+                    Отправить
                 </StyledLoginForm.Button>
             </StyledLoginForm.Footer>
         </StyledLoginForm.Form>
