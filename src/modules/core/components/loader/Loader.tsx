@@ -1,6 +1,5 @@
 import React from 'react';
 import {StyledLoader} from "./styled";
-import {CSSTransition} from 'react-transition-group'
 import {Props} from "./types";
 
 

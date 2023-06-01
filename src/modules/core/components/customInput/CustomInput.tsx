@@ -11,7 +11,7 @@ type Props = {
 const CustomInput = ({mask, ...props}: Props) => {
     return (
         mask ?
-            <InputMask mask={mask} {...props}>
+            <InputMask mask={mask} {...props} maskPlaceholder={''}>
                 <StiledCustomInput {...props}/>
             </InputMask> :
             <StiledCustomInput {...props}/>
