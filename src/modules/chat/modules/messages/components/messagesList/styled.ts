@@ -12,6 +12,7 @@ const Content = styled.div`
   flex-direction: column-reverse;
   width: 100%;
   min-height: 100%;
+  min-width: 40rem;
 `
 export const StyledMessageList = {
     Content,
