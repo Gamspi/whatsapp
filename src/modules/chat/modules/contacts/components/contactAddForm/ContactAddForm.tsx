@@ -3,16 +3,17 @@ import {StyledContactAddForm} from "./styled";
 import CustomInput from "../../../../../core/components/customInput/CustomInput";
 import {Props} from "./types";
 import {useController} from "./controller";
+import {phoneMask} from "../../../../../core/constants/phoneMask";
 
 const ContactAddForm = (props: Props) => {
-    const {closeHandler, setNameHandler, setTelHandler, submitHandler} = useController(props)
+    const {closeHandler, setNameHandler, setTelHandler, submitHandler, tel, name} = useController(props)
     return (
         props.isShow ?
             <StyledContactAddForm.Container>
                 <StyledContactAddForm.Background onClick={closeHandler}/>
                 <StyledContactAddForm.Body onSubmit={submitHandler}>
-                    <CustomInput placeholder='Name' onChange={setNameHandler}/>
-                    <CustomInput placeholder='Tel' onChange={setTelHandler}/>
+                    <CustomInput placeholder='Name' value={name.value} onChange={setNameHandler} isError={name.isError}/>
+                     <CustomInput placeholder='Tel' value={tel.value} onChange={setTelHandler} mask={phoneMask} isError={tel.isError}/>
                     <StyledContactAddForm.Button>
                         Добавить
                     </StyledContactAddForm.Button>

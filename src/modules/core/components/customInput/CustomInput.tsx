@@ -1,11 +1,20 @@
 import React, {InputHTMLAttributes} from 'react';
 import {StiledCustomInput} from "./styled";
+import InputMask from "react-input-mask";
 
-type Props = InputHTMLAttributes<HTMLInputElement>
+type Props = {
+    mask?: string,
+    isError?: boolean
+} & InputHTMLAttributes<HTMLInputElement>
 
-const CustomInput = (props: Props) => {
+
+const CustomInput = ({mask, ...props}: Props) => {
     return (
-        <StiledCustomInput {...props}/>
+        mask ?
+            <InputMask mask={mask} {...props}>
+                <StiledCustomInput {...props}/>
+            </InputMask> :
+            <StiledCustomInput {...props}/>
     );
 };
 
