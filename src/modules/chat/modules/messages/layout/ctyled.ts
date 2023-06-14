@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import whtsappBackgrond from '../assets/whtsappBackgrond.png'
+import {loaderAnimation, sendLoaderAnimation} from "../../../../core/style/animations/keyframes";
 
 const Header = styled.div`
   background-color: ${props => props.theme.background.lightBlue};
@@ -36,9 +37,19 @@ const List = styled.div`
   flex-grow: 1;
   overflow: hidden;
 `
+const Loading = styled.div`
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  svg {
+    fill: white;
+    animation: ${loaderAnimation} 1s infinite linear reverse;
+  }
+`
 
 export const StyledMessages = {
     List,
     Header,
-    Container
+    Container,
+    Loading
 }

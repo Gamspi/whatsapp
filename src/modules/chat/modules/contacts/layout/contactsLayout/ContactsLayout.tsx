@@ -1,7 +1,7 @@
 import React from 'react';
 import {useController} from "./controller";
 import ContactsItem from "../../components/contactsItem/ContactsItem";
-import {StyledContactsLayout} from "./sryled";
+import {StyledContactsLayout} from "./styled";
 import ContactAddForm from "../../components/contactAddForm/ContactAddForm";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 

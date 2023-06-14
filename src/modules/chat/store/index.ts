@@ -18,6 +18,7 @@ const initialState: ChatState = {
     contacts: [],
     chosenContact: null,
     isLoading: false,
+    isHistoryLoading: false,
     isSendLoading: false,
     isFetchNotification: false,
     isSendMessageError: false,
@@ -37,11 +38,11 @@ export const chatSlice = createSlice({
         })
         addCase(fetchMessageHistory.pending, (state) => {
             state.isGetHistoryError = false
-            state.isLoading = true
+            state.isHistoryLoading = true
         })
 
         addCase(fetchMessageHistory.fulfilled, (state, action: PayloadAction<AxiosResponse<ResponseHistoryMessage[]>>) => {
-            state.isLoading = false
+            state.isHistoryLoading = false
             const messageArray = action.payload?.data
             if (messageArray) {
                 state.messages = [...messageArray.filter(item => item.typeMessage === ContentTypeMessageEnum.TEXT || item.typeMessage === ContentTypeMessageEnum.EXTENDED_TEST
@@ -53,7 +54,7 @@ export const chatSlice = createSlice({
         })
         addCase(fetchMessageHistory.rejected, (state) => {
             state.isGetHistoryError = true
-            state.isLoading = true
+            state.isHistoryLoading = true
         })
 
         addCase(sendMessage.pending, (state) => {
