@@ -33,13 +33,13 @@ const Content = styled.div<StyledProps>`
 
     ${props => props.isMain ?
             css`
-              right: -.8rem;
+              right: -.7rem;
               border: .4rem solid transparent;
               border-left: .4rem solid ${props.theme.messages.main};
               border-top: .4rem solid ${props.theme.messages.main};
             ` :
             css`
-              left: -.8rem;
+              left: -.7rem;
               border: .4rem solid transparent;
               border-top: .4rem solid ${props.theme.messages.default};
               border-right: .4rem solid ${props.theme.messages.default};
