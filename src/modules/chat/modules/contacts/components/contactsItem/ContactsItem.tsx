@@ -9,7 +9,9 @@ type Props = {
 }
 
 const ContactsItem = ({item, isActive}: Props) => {
-    const {chooseContactHandler} = useController()
+    const {
+        chooseContactHandler
+    } = useController()
     return (
         <StyledContactItem.Container onClick={() => chooseContactHandler(item)} isActive={isActive}>
             <StyledContactItem.Label>

@@ -6,5 +6,7 @@ export const useController = () => {
     const chooseContactHandler = (contact: Contact) => {
         setChosenContact(contact)
     }
-    return {chooseContactHandler}
+    return {
+        chooseContactHandler
+    }
 }

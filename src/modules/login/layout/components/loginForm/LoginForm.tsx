@@ -17,7 +17,7 @@ const LoginForm = () => {
     } = useController()
     return (
         <StyledLoginForm.Form onSubmit={submitLoginFormHandler}>
-            {isLoginError && <Notification onClose={closeNotification}>Ошибка авторизации</Notification>}
+            <Notification onClose={closeNotification} isShow={isLoginError}>Ошибка авторизации</Notification>
             <StyledLoginForm.Title>
                 Авторизация
             </StyledLoginForm.Title>

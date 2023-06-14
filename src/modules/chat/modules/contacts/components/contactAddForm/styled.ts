@@ -24,6 +24,20 @@ const Container = styled.div`
   align-items: center;
   overflow: auto;
   padding: 2rem;
+  &.enter {
+    opacity: 0;
+  }
+  &.enter-active {
+    opacity: 1;
+    transition: opacity 300ms linear;
+  }
+  &.exit {
+    opacity: 1;
+  }
+  &.exit-active {
+    opacity: 0;
+    transition: opacity 300ms linear;
+  }
 `
 const Background = styled.div`
   position: absolute;

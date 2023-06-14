@@ -15,13 +15,11 @@ const MessageLayout = () => {
     return (
 
         <StyledMessages.Container>
-            {isGetHistoryError && <Notification onClose={hideNotificationHandler}>
+             <Notification onClose={hideNotificationHandler} isShow={isGetHistoryError}>
                 Ошибка получения истории сообщений
             </Notification>
-            }
-
             <StyledMessages.Header>
-                {chosenContact?.name}
+                {chosenContact?.name || chosenContact?.tel}
             </StyledMessages.Header>
             <StyledMessages.List>
                 <MessagesList messages={messages}/>

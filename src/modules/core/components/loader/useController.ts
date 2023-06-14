@@ -1,7 +1,8 @@
-import {useEffect, useMemo} from "react";
+import {useEffect, useMemo, useRef} from "react";
 
 export const useController =() => {
     const nodeElement = useMemo(() => document.createElement('div',), [])
+    const ref = useRef(null)
     useEffect(() => {
         const notificationRootElement = document.querySelector('#loader')
         notificationRootElement?.appendChild(nodeElement)
@@ -11,6 +12,7 @@ export const useController =() => {
         }
     }, [nodeElement])
     return {
+        ref,
         nodeElement
     }
 }

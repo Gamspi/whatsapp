@@ -4,13 +4,24 @@ import CustomInput from "../../../../../core/components/customInput/CustomInput"
 import {Props} from "./types";
 import {useController} from "./controller";
 import {phoneMask} from "../../../../../core/constants/phoneMask";
+import {CSSTransition} from "react-transition-group";
 
 const ContactAddForm = (props: Props) => {
-    const {closeHandler, setNameHandler, setTelHandler, submitHandler, tel, name} = useController(props)
+    const {
+        ref,
+        tel,
+        name,
+        closeHandler,
+        setTelHandler,
+        submitHandler,
+        setNameHandler
+    } = useController(props)
+
+
     return (
-        props.isShow ?
-            <StyledContactAddForm.Container>
-                <StyledContactAddForm.Background onClick={closeHandler}/>
+        <CSSTransition in={props.isShow} timeout={300} mountOnEnter unmountOnExit nodeRef={ref}>
+            <StyledContactAddForm.Container ref={ref}>
+                <StyledContactAddForm.Background onClick={closeHandler}  />
                 <StyledContactAddForm.Body onSubmit={submitHandler}>
                     <CustomInput placeholder='Name' value={name.value} onChange={setNameHandler} isError={name.isError}/>
                      <CustomInput placeholder='Tel' value={tel.value} onChange={setTelHandler} mask={phoneMask} isError={tel.isError}/>
@@ -18,8 +29,8 @@ const ContactAddForm = (props: Props) => {
                         Добавить
                     </StyledContactAddForm.Button>
                 </StyledContactAddForm.Body>
-            </StyledContactAddForm.Container> :
-            null
+            </StyledContactAddForm.Container>
+        </CSSTransition>
     );
 };
 

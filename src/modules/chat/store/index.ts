@@ -36,6 +36,7 @@ export const chatSlice = createSlice({
 
         })
         addCase(fetchMessageHistory.pending, (state) => {
+            state.isGetHistoryError = false
             state.isLoading = true
         })
 

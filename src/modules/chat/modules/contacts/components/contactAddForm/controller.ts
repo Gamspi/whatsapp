@@ -1,12 +1,12 @@
 import {Props} from "./types";
-import {ChangeEvent, FormEvent, useMemo, useState} from "react";
+import {ChangeEvent, FormEvent, useMemo, useRef, useState} from "react";
 import {useAction} from "../../../../../core/hooks/useActions";
 import {ContactTypeEnum} from "../../../../helpers/enums/contactTypeEnum";
 import {phoneLength} from "../../../../../core/constants/phoneMask";
 import login from "../../../../../login/Login";
 
 export const useController = ({setIsShow}: Props) => {
-
+    const ref = useRef(null)
     const {addContact} = useAction()
     const [name, setName] = useState({value: '', isError: false})
     const [tel, setTel] = useState({value: '', isError: false})
@@ -47,6 +47,7 @@ export const useController = ({setIsShow}: Props) => {
 
     }
     return {
+        ref,
         tel,
         name,
         closeHandler,

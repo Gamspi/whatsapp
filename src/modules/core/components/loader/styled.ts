@@ -12,8 +12,21 @@ const Container = styled.div<StyledArgsType>`
   align-items: center;
   justify-content: center;
   background-color: ${props => props.theme.background.black};
-  opacity: ${props => props.opacity || 1};
   z-index: 20;
+  &.enter {
+    opacity: 0;
+  }
+  &.enter-active {
+    opacity: 1;
+    transition: opacity 300ms linear;
+  }
+  &.exit {
+    opacity: 1;
+  }
+  &.exit-active {
+    opacity: 0;
+    transition: opacity 300ms linear;
+  }
 `
 const Body = styled.svg`
   stroke: ${props => props.theme.colors.primary};

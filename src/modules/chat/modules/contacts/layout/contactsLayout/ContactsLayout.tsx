@@ -3,6 +3,7 @@ import {useController} from "./controller";
 import ContactsItem from "../../components/contactsItem/ContactsItem";
 import {StyledContactsLayout} from "./sryled";
 import ContactAddForm from "../../components/contactAddForm/ContactAddForm";
+import {CSSTransition, TransitionGroup} from "react-transition-group";
 
 const ContactsLayout = () => {
     const{
@@ -15,9 +16,14 @@ const ContactsLayout = () => {
     return (
         <StyledContactsLayout.Container>
             <StyledContactsLayout.List>
-                {contacts.map(contact => (
-                    <ContactsItem item={contact} key={contact.id} isActive={contact.id === chosenContact?.id}/>
-                ))}
+                <TransitionGroup>
+                    {contacts.map(contact => (
+                        <CSSTransition timeout={1000}>
+                            <ContactsItem item={contact} key={contact.id} isActive={contact.id === chosenContact?.id}/>
+                        </CSSTransition>
+
+                    ))}
+                </TransitionGroup>
             </StyledContactsLayout.List>
             <StyledContactsLayout.AddButton onClick={showAddFormHandler}>
                 Добавить контакт
